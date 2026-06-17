@@ -1,19 +1,23 @@
-# PickWiz - Secure Flask Web Application
+Supply Chain Attack Simulation
+This project demonstrates a Supply Chain Attack, where an attacker compromises a website by poisoning a third-party dependency. In this scenario, I simulated how an external script can be used to steal session data from an unsuspecting user.
 
-A dynamic Python web application built using the Flask framework. The app allows users to manage jars containing random notes and draw from them. This project was developed as part of a technical portfolio, focusing on secure coding practices and real-world application deployment.
+The Process
+Attacker Infrastructure: I set up a "listener" endpoint on my server. Its job is to secretly collect and display any information that is sent to it, acting as the attacker's central data collection point.
 
-## AI Collaboration and Independent Learning
-A core part of developing this project was leveraging Artificial Intelligence as a collaborative partner. In today's rapidly advancing technological landscape, knowing how to effectively work alongside AI is an essential skill. Through this process, I demonstrated:
-* **Prompt Engineering and Collaboration:** Working iteratively with AI to design architecture, debug code, and implement security features.
-* **Independent Learning:** Using AI to understand backend logic line-by-line, accelerating my technical growth and problem-solving capabilities.
-* **Adaptability:** Embracing modern workflows by combining human critical thinking with AI efficiency to build a complete product from scratch.
+[https://github.com/alisip-3/Python_PickWiz/blob/main/1.server_log.png]
 
-## Security Features Included
-* **Brute-Force Protection (IP Banning):** Automatically tracks and bans client IP addresses after 3 consecutive failed login attempts.
-* **Input Validation:** Strict controls over user input length to mitigate potential validation vulnerabilities.
-* **Security Logging (security.log):** Generates real-time forensic log entries tracking failed logins, locked IPs, and suspicious activity with accurate timestamps for future SOC investigation.
+The Victim Site: I modified a webpage to include an external script (a fake accessibility tool). This mimics real-world scenarios where websites trust external code that might be malicious.
 
-## Tech Stack
-* **Backend:** Python, Flask
-* **Frontend:** Clean HTML5, Responsive CSS
-* **Security:** Native Python automation and custom forensic logging mechanisms
+[Insert Screenshot: The HTML of the banking site]
+
+User Simulation: To prove the attack works, I simulated a real user session by manually setting a bank_session cookie. This represents the sensitive data the attacker wants to steal.
+
+[Insert Screenshot: The cookie set in the console]
+
+Data Exfiltration: Once the page loads, the malicious script automatically runs in the background. It extracts the sensitive cookie and sends it to the listener endpoint I created in step 1.
+
+[Insert Screenshot: The Network tab showing the data being sent]
+
+Results: The data is successfully received and recorded in the server logs, confirming that the "stolen" information has been exfiltrated from the user's browser.
+
+[Insert Screenshot: The log in Render showing the stolen cookie]
