@@ -251,7 +251,9 @@ def delete_note(jar_name, file_name):
 
     return redirect(f"/jar/{jar_name}")
 
-
+@app.route('/secure-zone')
+def secure_zone():
+    return render_template('secure_site.html')
     
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
