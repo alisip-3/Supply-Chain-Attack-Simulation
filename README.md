@@ -2,16 +2,29 @@
 
 ### Overview ###
 
-This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements—can be weaponized to compromise sensitive user session data
+This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements can be weaponized to compromise sensitive user session data
 
 ## Attack Workflow ##
-1. Dependency Injection: A malicious script is injected into the web application, simulating a compromised third-party library that the application trusts.
 
-2.Session Creation: When a user logs into the application, the browser generates a valid session_token cookie.
+1. Setting up the C2 Server
+I created a Python server (using Flask) that acts as my "Command & Control" (C2) server. The server listens for incoming requests at a specific endpoint (/log) and logs any data received from the browser.
 
-3.Data Exfiltration: The malicious script, running within the application's origin, automatically accesses document.cookie, extracts the session token, and exfiltrates it to an external Command & Control (C2) server.
+[Figure 1: The backend server code, waiting to receive and log incoming](data.https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/1.server_log.png)
 
-4.Impact: The attacker receives the stolen session token, enabling them to perform Session Hijacking.
+2. Malicious Code Injection
+I embedded a small snippet of JavaScript into the login page. This script mimics a trusted external library, but it is triggered as soon as the user logs in.
+
+[Figure 2: The malicious script in the HTML, waiting for the user to submit the login form.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/2.fetch.png)
+
+3. Data Exfiltration
+Once the user logs in, the browser generates a session cookie (session_token). The malicious script accesses document.cookie, extracts the token, and sends it to my server via an asynchronous fetch request.
+
+[Figure 3: The browser's Network Tab showing the sensitive cookie being exfiltrated to my server.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/3.cookie.png)
+
+4. Successful Capture
+My server receives the request, extracts the cookie, and prints it to the logs. With this token, an attacker could impersonate the user without needing a password.
+
+[Figure 4: The stolen session token appearing in my server logs, confirming the successful attack.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/4.log.png)
 
 ## Vulnerability Analysis ##
 ### The core vulnerability is the excessive trust in third-party scripts. ###
