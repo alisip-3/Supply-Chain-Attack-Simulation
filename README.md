@@ -1,6 +1,8 @@
-(#Security Analysis Report: Supply Chain Attack Simulation#)
-##Overview##
-###This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements—can be weaponized to compromise sensitive user session data.###
+**Security Analysis Report: Supply Chain Attack Simulation**
+
+*Overview*
+
+This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements—can be weaponized to compromise sensitive user session data
 
 ##Attack Workflow##
 1. Dependency Injection: A malicious script is injected into the web application, simulating a compromised third-party library that the application trusts.
