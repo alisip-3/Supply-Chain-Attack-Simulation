@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bank Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .balance-box { background: #3498db; color: white; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; }
+        .balance-amount { font-size: 40px; font-weight: bold; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { background: #2c3e50; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #34495e; }
+        .transaction-history { margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome, Daniel</h1>
+        
+        <div class="balance-box">
+            <p>Your Available Balance</p>
+            <div class="balance-amount">$15,420.50</div>
+        </div>
+
+        <div class="actions">
+            <button>Transfer Funds</button>
+            <button>Pay Bills</button>
+        </div>
+
+        <div class="transaction-history">
+            <h3>Recent Transactions</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>2026-06-20</td>
+                    <td>Salary Deposit</td>
+                    <td style="color: green;">+$3,200.00</td>
+                </tr>
+                <tr>
+                    <td>2026-06-18</td>
+                    <td>Supermarket</td>
+                    <td style="color: red;">-$120.45</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
