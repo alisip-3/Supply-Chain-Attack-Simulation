@@ -4,6 +4,11 @@
 
 This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements can be weaponized to compromise sensitive user session data
 
+## Live Demo
+You can test the simulation here:
+[Click here to access the Simulated Bank Login](https://python-pickwiz.onrender.com/secure-zone)
+*(Note: This is a security demonstration. The cookie theft is purely for educational purposes and captured in the logs.)*
+
 ## Attack Workflow ##
 
 1. Setting up the C2 Server
