@@ -118,9 +118,9 @@ def log_data():
             print(f"{key}: {value}")
 
     return "OK", 200
-@app.route('/secure-zone/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
+@app.route('/bank/dashboard')
+def bank_dashboard():
+    return render_template('bank.html')
 
 @app.route('/assets/accessibility.js', methods=['GET'])
 def accessibility_plugin():
