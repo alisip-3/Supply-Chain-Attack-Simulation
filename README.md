@@ -9,12 +9,12 @@ This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Att
 1. Setting up the C2 Server
 I created a Python server (using Flask) that acts as my "Command & Control" (C2) server. The server listens for incoming requests at a specific endpoint (/log) and logs any data received from the browser.
 
-![Figure 1: The backend server code, waiting to receive and log incoming](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/1.server_log.png)
+![Figure 1: The backend server code, waiting to receive and log incoming](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/1.server.png)
 
 2. Malicious Code Injection
 I embedded a small snippet of JavaScript into the login page. This script mimics a trusted external library, but it is triggered as soon as the user logs in.
 
-![Figure 2: The malicious script in the HTML, waiting for the user to submit the login form.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/2.fetch.png)
+![Figure 2: The malicious script in the HTML, waiting for the user to submit the login form.](https://github.com/alisip-3/Cookie-Exfiltration-PoC/blob/main/2.%20fetch.png)
 
 3. Data Exfiltration
 Once the user logs in, the browser generates a session cookie (session_token). The malicious script accesses document.cookie, extracts the token, and sends it to my server via an asynchronous fetch request.
