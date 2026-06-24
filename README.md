@@ -1,23 +1,38 @@
-Supply Chain Attack Simulation
-This project demonstrates a Supply Chain Attack, where an attacker compromises a website by poisoning a third-party dependency. In this scenario, I simulated how an external script can be used to steal session data from an unsuspecting user.
+Security Analysis Report: Supply Chain Attack Simulation
+Overview
+This project serves as a Proof of Concept (PoC) demonstrating a Supply Chain Attack. The simulation highlights how third-party dependencies—even those intended for minor UI improvements—can be weaponized to compromise sensitive user session data.
 
-The Process
-Attacker Infrastructure: I set up a "listener" endpoint on my server. Its job is to secretly collect and display any information that is sent to it, acting as the attacker's central data collection point.
+Attack Workflow
+Dependency Injection: A malicious script is injected into the web application, simulating a compromised third-party library that the application trusts.
 
-![The code of the log route in app.py](https://github.com/alisip-3/Python_PickWiz/blob/main/1.server_log.png)
+Session Creation: When a user logs into the application, the browser generates a valid session_token cookie.
 
-The Victim Site: I modified a webpage to include an external script (a fake accessibility tool). This mimics real-world scenarios where websites trust external code that might be malicious.
+Data Exfiltration: The malicious script, running within the application's origin, automatically accesses document.cookie, extracts the session token, and exfiltrates it to an external Command & Control (C2) server.
 
-![The HTML of the banking site](https://github.com/alisip-3/Python_PickWiz/blob/main/2.fetch.png)
+Impact: The attacker receives the stolen session token, enabling them to perform Session Hijacking.
 
-User Simulation: To prove the attack works, I simulated a real user session by manually setting a bank_session cookie. This represents the sensitive data the attacker wants to steal.
+Vulnerability Analysis
+The core vulnerability is the excessive trust in third-party scripts.
 
-![The cookie set in the console](https://github.com/alisip-3/Python_PickWiz/blob/main/3.cookie.png)
+Lack of Isolation: Scripts running in the browser share the same origin and have access to sensitive data such as cookies.
 
-Data Exfiltration: Once the page loads, the malicious script automatically runs in the background. It extracts the sensitive cookie and sends it to the listener endpoint I created in step 1.
+Implicit Trust: Applications often load external scripts without verifying their integrity or restricting their capabilities.
 
-![The Network tab showing the data being sent](https://github.com/alisip-3/Python_PickWiz/blob/main/4.network.png)
+Mitigation & Prevention
+To defend against such attacks, the following security controls should be implemented:
 
-Results: The data is successfully received and recorded in the server logs, confirming that the "stolen" information has been exfiltrated from the user's browser.
+Content Security Policy (CSP): Implement a strict CSP to restrict where scripts can be loaded from and, more importantly, to prevent the exfiltration of data to unauthorized external domains (using connect-src).
 
-![The log in Render showing the stolen cookie](https://github.com/alisip-3/Python_PickWiz/blob/main/5.the%20payoff.png)
+Subresource Integrity (SRI): Use SRI hashes to ensure that the browser only executes files that match a known, verified cryptographic hash.
+
+HttpOnly Cookies: Set the HttpOnly flag on sensitive cookies (like session tokens). This prevents document.cookie from accessing them via JavaScript, rendering this specific attack ineffective.
+
+Dependency Auditing: Regularly audit and update third-party libraries and avoid loading external scripts from untrusted or unverified sources.
+
+Tools Used:
+
+Frontend: HTML5, JavaScript
+
+Backend (C2 Server): Flask (Python)
+
+Deployment: Render
