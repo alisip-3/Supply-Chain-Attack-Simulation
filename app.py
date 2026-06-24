@@ -108,12 +108,12 @@ def login_check():
 @app.route('/log', methods=['GET', 'POST'])
 def log_data():
     if request.args:
-        print("\n--- [!] הגיע מידע חדש (GET) ---")
+        print("\n--- [!] new information as arrived (GET) ---")
         for key, value in request.args.items():
             print(f"{key}: {value}")
 
     if request.form:
-        print("\n--- [!] הגיע מידע חדש (POST) ---")
+        print("\n--- [!] new information as arrived (POST) ---")
         for key, value in request.form.items():
             print(f"{key}: {value}")
 
