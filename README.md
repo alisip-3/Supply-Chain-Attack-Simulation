@@ -17,8 +17,7 @@ I paid attention to the small details to make this feel like a real-world scenar
 
 ## Screenshots
 
-![Banking Dashboard: A professional interface that builds trust.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/images/chatbox.png)
-
+![Banking Dashboard: A professional interface that builds trust.](images/chatbox.png)
 ![The Attack: Showing the malicious link inside the AI chat widget.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/chatbox.png)
 
 ![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.](https://github.com/alisip-3/Supply-Chain-Attack-Simulation/blob/main/inspect.png)
