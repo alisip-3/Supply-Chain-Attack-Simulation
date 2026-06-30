@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 from datetime import datetime
 from flask_cors import CORS
 
@@ -16,12 +16,15 @@ def log_security_event(event_type, ip_address, details=""):
 def home():
     return render_template("login.html")
 
+from flask import Flask, render_template, request, redirect, make_response # תוסיפי את make_response
+
 @app.route("/login", methods=["POST"])
 def login():
-    # Fetch the username from the login form
     username = request.form.get("username", "Customer")
-    # Redirect to bank  and pass the username as a URL parameter
-    return redirect(f"/secure-zone/bank?user={username}")
+    resp = make_response(redirect(f"/secure-zone/bank?user={username}"))
+    resp.set_cookie('session_token', 'secure_user_session_12345') 
+    return resp
+
 
 @app.route("/secure-zone/bank")
 def bank_dashboard():
