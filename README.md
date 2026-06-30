@@ -7,7 +7,7 @@ In recent months, we’ve seen more and more companies integrating AI chatbots i
  ## Live Demo
 You can check out the simulation here: [[Live Link Here](https://python-pickwiz.onrender.com)]
 
-(Note: Use your own username/password to log in—it's just a simulation!)
+(Note: Use your own username/password to log in it's just a simulation)
 
 ## How it Works
 I created a full-stack banking dashboard simulation to act as the "victim" site. The core of the project is the AI chatbot integration:
@@ -28,10 +28,20 @@ I paid attention to the small details to make this feel like a real-world scenar
 ![Proof of Concept: The Network tab showing the cookie being exfiltrated to the /log endpoint.](images/inspect.png)
 ![](images/log.png)
 
-## Why this matters
-This simulation shows why it’s not enough to secure your own code. You are only as secure as the weakest third-party library you run. By building this end-to-end, I was able to better understand the impact of XSS vulnerabilities in a real-world, high-stakes environment like a banking portal.
+## Mitigation & Defense
+How do we protect ourselves from this kind of attack? Here are the key security practices:
 
-Disclaimer: This project was built for educational purposes only to demonstrate security vulnerabilities and how to defend against them.
+- Content Security Policy (CSP): Implementing a strict CSP would prevent the browser from sending data to unauthorized domains, effectively blocking the exfiltration part of the attack.
+
+- Subresource Integrity (SRI): When using external scripts (like a chatbot), we should use SRI hashes to ensure that the code hasn't been tampered with or modified by the vendor.
+
+- Principle of Least Privilege: Restricting what scripts can access (e.g., setting the HttpOnly flag on cookies makes them inaccessible to JavaScript).
+
+- Third-Party Risk Management (TPRM): Before integrating external services, security teams must audit the vendor’s security posture and ensure they maintain a secure supply chainal.
+
+
+## Disclaimer
+This project is for educational purposes only. All data, including the banking dashboard, user authentication, and the "stolen" cookies, are part of a controlled simulation environment. No real-world systems, users, or financial data are harmed or involved. The purpose of this project is to showcase how security vulnerabilities function in order to learn how to defend against them.
 
 ### Tools Used: ###
 
