@@ -31,13 +31,13 @@ I paid attention to the small details to make this feel like a real-world scenar
 ## Mitigation & Defense
 ### How do we protect ourselves from this kind of attack? Here are the key security practices:
 
-- Content Security Policy (CSP): Implementing a strict CSP would prevent the browser from sending data to unauthorized domains, effectively blocking the exfiltration part of the attack.
+**Content Security Policy (CSP):** Implementing a strict CSP would prevent the browser from sending data to unauthorized domains, effectively blocking the exfiltration part of the attack.
 
-- Subresource Integrity (SRI): When using external scripts (like a chatbot), we should use SRI hashes to ensure that the code hasn't been tampered with or modified by the vendor.
+**Subresource Integrity (SRI):** When using external scripts (like a chatbot), we should use SRI hashes to ensure that the code hasn't been tampered with or modified by the vendor.
 
-- Principle of Least Privilege: Restricting what scripts can access (e.g., setting the HttpOnly flag on cookies makes them inaccessible to JavaScript).
+**Principle of Least Privilege:** Restricting what scripts can access (e.g., setting the HttpOnly flag on cookies makes them inaccessible to JavaScript).
 
-- Third-Party Risk Management (TPRM): Before integrating external services, security teams must audit the vendor’s security posture and ensure they maintain a secure supply chainal.
+**Third-Party Risk Management (TPRM):** Before integrating external services, security teams must audit the vendor’s security posture and ensure they maintain a secure supply chainal.
 
 ## Security & Robustness
 Since this project simulates a security attack, I wanted the simulation environment itself to be stable and resilient. I implemented a few "best practice" hardening techniques to ensure the demo runs smoothly:
